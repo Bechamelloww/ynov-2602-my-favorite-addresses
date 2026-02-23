@@ -1,0 +1,25 @@
+info:
+  name: post /
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{baseURL}}/addresses/"
+  body:
+    type: json
+    data: |-
+      {
+        "searchWord":"tour eiffel",
+        "name":"Tour Eiffel",
+        "description":""
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc3MTg0MjUwNn0.7k_dENK2km0N1gmybGWs7zCyecOElSGtMbqJ0e53bPg
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

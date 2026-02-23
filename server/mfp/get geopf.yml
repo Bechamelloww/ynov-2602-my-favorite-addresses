@@ -1,0 +1,19 @@
+info:
+  name: get geopf
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: https://data.geopf.fr/geocodage/search?q=lyon+ynov+campus
+  params:
+    - name: q
+      value: lyon+ynov+campus
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
