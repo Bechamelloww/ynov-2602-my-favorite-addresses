@@ -5,6 +5,7 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: cd server
       - run: npm install
       - run: npm run test
       - name: List files in the repository
