@@ -2,13 +2,13 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  backend-tests:
     runs-on: ubuntu-latest
     steps:
-      - run: cd server
-      - run: npm install
-      - run: npm run test
-      - name: List files in the repository
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - name: Run tests
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          cd server
+          npm install
+          npm run test
