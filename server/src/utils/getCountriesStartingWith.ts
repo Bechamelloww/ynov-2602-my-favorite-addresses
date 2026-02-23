@@ -12,7 +12,7 @@ export async function getCountriesStartingWith(
     }>;
     return countries
       .map((c) => c.country)
-      .filter((name) => name.startsWith(searchWord + "aaa"));
+      .filter((name) => name.startsWith(searchWord));
   } catch (err) {
     console.error(`🆘 got an error:`, err);
   }
