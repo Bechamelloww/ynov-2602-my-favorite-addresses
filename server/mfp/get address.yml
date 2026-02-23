@@ -5,8 +5,17 @@ info:
 
 http:
   method: GET
-  url: http://localhost:3000/api/addresses/
-  auth: inherit
+  url: "{{baseURL}}/addresses/"
+  body:
+    type: json
+    data: |-
+      {
+
+        
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc3MTg0MjUwNn0.7k_dENK2km0N1gmybGWs7zCyecOElSGtMbqJ0e53bPg
 
 settings:
   encodeUrl: true
