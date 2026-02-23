@@ -14,7 +14,7 @@ describe("getCountriesStartingWith", () => {
               },
           },
       });
-    const countries = await getCountriesStartingWith("France");
+    const countries = await getCountriesStartingWith("Fr");
     expect(countries).toEqual(["France"]);
   });
 });
