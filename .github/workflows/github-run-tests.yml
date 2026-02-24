@@ -1,5 +1,5 @@
 name: MFP CI Backend Tests
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is running the tests for his last commit 🚀
 on: [push]
 jobs:
   backend-tests:
