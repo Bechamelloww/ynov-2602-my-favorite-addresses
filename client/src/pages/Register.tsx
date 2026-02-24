@@ -35,25 +35,27 @@ export default function Register() {
         <h1>Inscription</h1>
         <p className="text-muted">Créez un compte pour enregistrer vos adresses</p>
         <form onSubmit={handleSubmit}>
-          <label className="label">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="vous@exemple.fr"
-            required
-            autoComplete="email"
-          />
-          <label className="label" style={{ marginTop: 12 }}>Mot de passe</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
-            required
-            minLength={6}
-            autoComplete="new-password"
-          />
+            <label className="label" htmlFor="email">Email</label>
+            <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="vous@exemple.fr"
+                required
+                autoComplete="email"
+            />
+            <label className="label" htmlFor="password" style={{ marginTop: 12 }}>Mot de passe</label>
+            <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+                minLength={6}
+                autoComplete="new-password"
+            />
           {error && <p className="error">{error}</p>}
           <button type="submit" className="btn-primary" style={{ marginTop: 20, width: "100%" }} disabled={loading}>
             {loading ? "Création…" : "S'inscrire"}
