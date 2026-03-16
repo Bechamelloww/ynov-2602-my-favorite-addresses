@@ -4,6 +4,7 @@ import { Address } from "../entities/Address";
 import { isAuthorized } from "../utils/isAuthorized";
 import { getUserFromRequest } from "../utils/getUserFromRequest";
 import { getDistance } from "../utils/getDistance";
+import { getCountriesStartingWith } from "../utils/getCountriesStartingWith";
 
 const addressesRouter = Router();
 
@@ -74,6 +75,19 @@ addressesRouter.post("/searches", isAuthorized, async (req, res) => {
   }
 
   return res.json({ items: closeAddresses });
+});
+
+addressesRouter.get("/countries", isAuthorized, async (req, res) => {
+  const searchWord = req.query.searchWord as string | undefined;
+
+  if (!searchWord) {
+    return res
+      .status(400)
+      .json({ message: `searchWord query parameter is required` });
+  }
+
+  const countries = await getCountriesStartingWith(searchWord);
+  return res.json({ items: countries });
 });
 
 export default addressesRouter;
