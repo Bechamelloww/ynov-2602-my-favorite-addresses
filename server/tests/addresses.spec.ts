@@ -3,14 +3,22 @@ import { faker } from "@faker-js/faker";
 import app from "../src/app";
 import datasource from "../src/datasource";
 import { getCoordinatesFromSearch } from "../src/utils/getCoordinatesFromSearch";
+import { getCountriesStartingWith } from "../src/utils/getCountriesStartingWith";
 
 jest.mock("../src/utils/getCoordinatesFromSearch", () => ({
   getCoordinatesFromSearch: jest.fn(),
 }));
 
+jest.mock("../src/utils/getCountriesStartingWith", () => ({
+  getCountriesStartingWith: jest.fn(),
+}));
+
 const mockedGetCoordinates = getCoordinatesFromSearch as jest.MockedFunction<
   typeof getCoordinatesFromSearch
 >;
+
+const mockedGetCountriesStartingWith =
+  getCountriesStartingWith as jest.MockedFunction<typeof getCountriesStartingWith>;
 
 beforeAll(async () => {
   await datasource.initialize();
@@ -170,6 +178,32 @@ describe("Addresses API", () => {
         .expect(200);
       expect(res.body.items.length).toBeGreaterThanOrEqual(1);
       expect(res.body.items.some((a: { name: string }) => a.name === "Paris")).toBe(true);
+    });
+  });
+
+  describe("GET /api/addresses/countries", () => {
+    it("returns 403 without auth", async () => {
+      await request(app).get("/api/addresses/countries").expect(403);
+    });
+
+    it("returns 400 when searchWord is missing", async () => {
+      const res = await request(app)
+        .get("/api/addresses/countries")
+        .set("Authorization", `Bearer ${token}`)
+        .expect(400);
+      expect(res.body.message).toMatch(/searchWord query parameter is required/);
+    });
+
+    it("returns 200 and items array of countries when searchWord is provided", async () => {
+      mockedGetCountriesStartingWith.mockResolvedValue(["France", "French Guiana"]);
+
+      const res = await request(app)
+        .get("/api/addresses/countries")
+        .set("Authorization", `Bearer ${token}`)
+        .query({ searchWord: "Fr" })
+        .expect(200);
+
+      expect(res.body.items).toEqual(["France", "French Guiana"]);
     });
   });
 });

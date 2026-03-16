@@ -27,6 +27,33 @@ describe("User API", () => {
         expect(res.body.item.id).toBeDefined();
     });
 
+  it("should not allow creating a user with an already taken email", async () => {
+    // créer un premier utilisateur
+    await request(app)
+      .post("/api/users")
+      .send({ email, password })
+      .expect(200);
+
+    // tenter création avec le même email
+    const res = await request(app)
+      .post("/api/users")
+      .send({ email, password: faker.internet.password() })
+      .expect(400);
+
+    expect(res.body.message).toMatch(/email already in use/i);
+  });
+
+  it("should not allow creating a user with an invalid email", async () => {
+    const invalidEmail = "not-an-email";
+
+    const res = await request(app)
+      .post("/api/users")
+      .send({ email: invalidEmail, password })
+      .expect(400);
+
+    expect(res.body.message).toMatch(/invalid email/i);
+  });
+
     it("should login the user", async () => {
         const res = await request(app)
             .post("/api/users/tokens")
