@@ -20,7 +20,7 @@ describe("User API", () => {
     const res = await request(app)
       .post("/api/users")
       .send({ email, password })
-      .expect(200);
+      .expect(201);
 
     expect(res.body.item).toBeDefined();
     expect(res.body.item.email).toBe(email);

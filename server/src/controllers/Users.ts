@@ -29,16 +29,11 @@ usersRouter.post("/", async (req, res) => {
     return res.status(400).json({ message: `email already in use` });
   }
 
-  try {
-    const user = new User();
-    user.email = email;
-    user.hashedPassword = await argon2.hash(password);
-    await user.save();
-    return res.json({ item: user });
-  } catch (e) {
-    console.error(`🆘 got error: ${JSON.stringify(e)}`, e);
-    return res.status(500).json({ message: `unable to create user` });
-  }
+  const user = new User();
+  user.email = email;
+  user.hashedPassword = await argon2.hash(password);
+  await user.save();
+  return res.status(201).json({ item: user });
 });
 
 usersRouter.get("/me", isAuthorized, async (req, res) => {
