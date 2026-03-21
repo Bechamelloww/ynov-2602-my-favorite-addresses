@@ -1,0 +1,23 @@
+info:
+  name: toggle favorite
+  type: http
+  seq: 10
+
+http:
+  method: POST
+  url: "{{baseURL}}/addresses/1/favorite"
+  body:
+    type: json
+    data: |-
+      {
+        "favorite": true
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTc3MTg0MjUwNn0.7k_dENK2km0N1gmybGWs7zCyecOElSGtMbqJ0e53bPg
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
