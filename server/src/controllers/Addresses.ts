@@ -76,4 +76,6 @@ addressesRouter.post("/searches", isAuthorized, async (req, res) => {
   return res.json({ items: closeAddresses });
 });
 
+
+
 export default addressesRouter;

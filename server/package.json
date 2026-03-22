@@ -5,20 +5,28 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky",
+    "start:mini-api": "ts-node tests/run-mini-api.ts"
   },
   "dependencies": {
+    "@types/supertest": "^6.0.3",
     "argon2": "^0.44.0",
     "axios": "^1.13.5",
     "better-sqlite3": "^12.6.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "supertest": "^7.2.2",
     "typeorm": "^0.3.28"
   },
   "devDependencies": {
+    "@faker-js/faker": "~9.9.0",
+    "@playwright/test": "^1.58.2",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^25.3.0",
+    "husky": "^9.1.7",
     "jest": "^30.2.0",
     "nodemon": "^3.1.11",
     "ts-jest": "^29.4.6",
